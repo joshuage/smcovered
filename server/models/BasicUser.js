@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const basicUserSchema = mongoose.Schema({
   email: {
@@ -20,7 +21,11 @@ const basicUserSchema = mongoose.Schema({
   },
   title: {
     type: String,
-    required: true
+    // required: true
+  },
+  college: {
+    type: Schema.Types.ObjectId,
+    ref: 'College'
   }
 })
 

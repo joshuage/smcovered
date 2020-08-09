@@ -8,12 +8,14 @@ connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }))
 
-app.get('/', (req,res) =>
-  res.json({ msg: 'Welcome!' })
-);
+// app.get('/', (req,res) =>
+//   res.json({ msg: 'Welcome!' })
+// );
 
 // Define Routes
-// app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+// app.use('/api/basicuser', require('./routes/basicUser'));
+// app.use('/api/adminuser', require('./routes/adminUser'));
 
 const PORT = process.env.PORT || 5000;
 
@@ -42,3 +44,30 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 // }
 
 // adminRegister();
+
+
+// Register University
+// const College = require('./models/College');
+// const collegeRegister = async() => {
+//   // const name = 'University of Southern California';
+//   const name = 'University of California, Riverside';
+//   const area = 'Western';
+
+//   const co = new College({
+//     name,
+//     area,
+//     availability: true
+//   });
+
+//   await co.save();
+
+//   console.log(`${name} Register Success!`);
+// }
+// collegeRegister();
+
+// const w = new WeChat({
+//   wechatId: '',
+//   groupName: ''
+// })
+
+// await WeChat.save()

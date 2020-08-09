@@ -14,6 +14,10 @@ const WechatSchema = new Schema({
     type: Boolean,
     default: false
   },
+  ignore: {
+    type: Boolean,
+    default: false
+  },
   status: {
     type: String
   },
@@ -24,8 +28,11 @@ const WechatSchema = new Schema({
     type: Date,
     defaule: Date.now
   },
+  groupName: {
+
+  },
   college: {
-    type: Schema.Types.objectId,
+    type: Schema.Types.ObjectId,
     ref: 'College'
   }
 })
