@@ -19,13 +19,20 @@ const basicUserSchema = mongoose.Schema({
     type: Boolean,
     required: true
   },
-  title: {
-    type: String,
-    // required: true
-  },
+  // title: {
+  //   type: String,
+  //   // required: true
+  // },
   college: {
     type: Schema.Types.ObjectId,
     ref: 'College'
+  },
+  collegeDisplay: {
+    type: String,
+    required: true
+  },
+  area: {
+    type: String
   }
 })
 

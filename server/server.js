@@ -23,15 +23,69 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 // // Admin register
 // const bcrypt = require('bcryptjs');
-// const User = require('./models/User');
+// const User = require('./models/AdminUser');
 
 // const adminRegister = async() => {
-//   const password = 'smtop123!!#qqq';
+//   const password = 'test123123';
 
 //   const user = new User({
-//     email: 'smcoverdmanagementsystem@gmail.com',
+//     email: 'mingkunm@usc.edu',
 //     password,
-//     title: 'admin',
+//     status: true
+//   });
+
+//   const salt = await bcrypt.genSalt(10);
+//   user.password = await bcrypt.hash(password, salt);
+
+//   await user.save();
+
+//   console.log('Admin register success!');
+// }
+// adminRegister();
+
+
+
+// basic user register
+// const bcrypt = require('bcryptjs');
+// const User = require('./models/BasicUser');
+// const College = require('./models/College');
+
+// const basicRegister = async() => {
+//   const college = await College.findById('5f2f7a09a5dc8a9d6f158996');
+//   const collegeDisplay = college.name;
+//   const password = 'test123123';
+
+//   const user = new User({
+//     email: 'mmk.ee.911@gmail.com',
+//     password,
+//     college: '5f2f7a09a5dc8a9d6f158996',
+//     collegeDisplay,
+//     area: 'Western',
+//     status: true
+//   });
+//   const salt = await bcrypt.genSalt(10);
+//   user.password = await bcrypt.hash(password, salt);
+
+//   await user.save();
+//   console.log('Basic register success!');
+// }
+// basicRegister();
+
+
+
+
+
+// AM user register
+// const bcrypt = require('bcryptjs');
+// const User = require('./models/AmUser');
+
+// const amRegister = async() => {
+//   const password = 'test123123';
+
+//   const user = new User({
+//     email: 'mmk.ee.911@gmail.com',
+//     password,
+
 //     status: true
 //   });
 
@@ -43,7 +97,12 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 //   console.log('Admin register success!');
 // }
 
-// adminRegister();
+// amRegister();
+
+
+
+
+
 
 
 // Register University
@@ -65,9 +124,51 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 // }
 // collegeRegister();
 
-// const w = new WeChat({
-//   wechatId: '',
-//   groupName: ''
-// })
 
-// await WeChat.save()
+
+
+// const fs = require('fs')
+// const db = './Data/GroupContact.json';
+// const Wechat = require('./models/WeChat')
+// const College = require('./models/College');
+// const groupName = '(10)USC&SM保险答疑群'
+
+// fs.readFile(db, 'utf8', async (err, data) => {
+//   const time1 = new Date();
+
+//   if (err) {
+//     console.log(err);
+//   }
+//   try {
+//     var count = 0;
+//     const jsonData = JSON.parse(data);
+//     const college = await College.findById('5f2f7a09a5dc8a9d6f158996');
+//     const collegeDisplay = college.name;
+
+//     jsonData.forEach(async jd => {
+//       if (jd.nickname === groupName) {
+//         jd.m_nsChatRoomMemList.split(';').forEach(async id => {
+
+//           const wechat = new Wechat({
+//             wechatId: id,
+//             groupName,
+//             college: '5f2f7a09a5dc8a9d6f158996',
+//             collegeDisplay,
+//             initalData: true
+//           })
+
+//           await wechat.save()
+//           count = count + 1;
+//         })
+//       }
+//     });
+
+//     const time2 = new Date();
+//     let totalTime = time2.getTime() - time1.getTime();
+//     totalTime = totalTime/1000;
+
+//     console.log(`录入 ${count} 条数据， 共耗时 ${totalTime} 秒`);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// })
