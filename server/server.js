@@ -17,6 +17,38 @@ app.use('/api/auth', require('./routes/auth'));
 // app.use('/api/basicuser', require('./routes/basicUser'));
 // app.use('/api/adminuser', require('./routes/adminUser'));
 
+// ************************************************************************************************************
+
+// @Yuchen 
+
+app.use('/login/yuchen', require('./routes/yuchen/login'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ************************************************************************************************************
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
