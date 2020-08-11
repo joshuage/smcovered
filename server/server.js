@@ -6,6 +6,13 @@ const connectDB = require('../config/db')
 connectDB();
 
 // Init Middleware
+// @yuchen
+app.use(function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
+	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
+	next();
+  });
 app.use(express.json({ extended: false }))
 
 // app.get('/', (req,res) =>
@@ -42,6 +49,32 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 //   console.log('Admin register success!');
 // }
 // adminRegister();
+
+
+
+
+// Admin register @yuchen
+const bcrypt = require('bcryptjs');
+const User = require('./models/AdminUser');
+
+const adminRegister = async() => {
+  const password = 'abc12345678';
+
+  const user = new User({
+    email: 'j0909089342@gmail.com',
+    password,
+    status: true
+  });
+
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(password, salt);
+
+  await user.save();
+
+  console.log('********************************************************');
+}
+adminRegister();
+
 
 
 

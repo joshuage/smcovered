@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../apis/smCovered';
 import { setAlert } from './alert'
 import {
   REGISTER_SUCCESS,
@@ -11,6 +11,7 @@ import {
 } from './types';
 import setAuthToken from '../utils/setAuthToken'
 
+
 // Load User
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
@@ -18,9 +19,9 @@ export const loadUser = () => async dispatch => {
   }
 
   try {
-    const res = await axios.get('/api/auth')
+    const res = await axios.get('/api/auth')  // @yuchen 最开始程序死在这里了; 现在改好了
 
-    // console.log(res);
+    console.log(res);
 
     dispatch({
       type: USER_LOADED,
