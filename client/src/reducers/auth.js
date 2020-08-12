@@ -9,7 +9,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem('token'),                
   isAuthenticated: null,
   loading: true,
   user: null,
@@ -27,12 +27,18 @@ export default function(state = initialState, action) {
       ...state,
       isAuthenticated: true,
       loading: false,
-      user: payload.token,
+      user: payload.token,                 // @yuchen 你这语句 user是token，那token是啥？
       title: payload.title
       }
-    case REGISTER_SUCCESS:
+    case REGISTER_SUCCESS:                 // @yuchen 你loading是干嘛的, 我没改
+			return {
+				...state,
+				isAuthenticated: true,
+				token: payload.token,
+				title: payload.title,
+			}
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', payload.token);
+      localStorage.setItem('token', payload.token)
       return {
         ...state,
         ...payload,

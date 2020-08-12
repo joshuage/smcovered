@@ -8,20 +8,20 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT
-} from './types';
-import setAuthToken from '../utils/setAuthToken'
+} from './types'
 
 
 // Load User
 export const loadUser = () => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (!localStorage.token) {
+		localStorage.setItem('token', '')
+    // setAuthToken(localStorage.token)          // @yuchen 
   }
 
   try {
     const res = await axios.get('/api/auth')  // @yuchen 最开始程序死在这里了; 现在改好了
 
-    console.log(res);
+    // console.log(res.data);
 
     dispatch({
       type: USER_LOADED,
@@ -35,25 +35,27 @@ export const loadUser = () => async dispatch => {
 }
 
 // Register User
-export const register = ({ email, password }) => async dispatch => {
-  const config = {
+export const register = (email, pwd, url) => async dispatch => {
+  const config = {                            // @yuchen
     headers: {
       'Content-Type': 'application/json'
     }
-  }
-
-  const body = JSON.stringify({ email, password});
+	}
+	console.log('from register')
+	console.log(email)
+  const body = JSON.stringify({ email, pwd})
 
   try {
-    const res = await axios.post('/api/users', body, config);
-
+    const { data } = await axios.post(`/api/${url}`, body, config)  // @yuchen 是因为这里有body 记得传入url
+		console.log(data)
+		localStorage.setItem('what happened', data.token)
 
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data
+      payload: data
     });
 
-    dispatch(loadUser());
+    //dispatch(loadUser());    // @yuchen redirect去哪里加个判断
 
   } catch (err) {
     const errors = err.response.data.errors;

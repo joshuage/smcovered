@@ -70,7 +70,10 @@ const Login = ({ login, isAuthenticated, title }) => {
   })
 
   const onSubmit = e => {
-    e.preventDefault();
+		e.preventDefault();
+		
+		console.log(formData)   //@ yuchen
+
     login(email, password);
   }
 

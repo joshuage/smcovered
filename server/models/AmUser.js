@@ -24,9 +24,9 @@ const amUserSchema = mongoose.Schema({
   //   // required: true
   // },
   college: {
-    type: Schema.Types.ObjectId,
+    type: String, // Schema.Types.ObjectId,      // @yuchen 我先不vaildate
     ref: 'College'
   }
 })
 
-module.exports = basicUser = mongoose.model('amUser', amUserSchema);
+module.exports = basicUser = mongoose.model('amUser', amUserSchema)

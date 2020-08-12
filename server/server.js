@@ -7,12 +7,15 @@ connectDB();
 
 // Init Middleware
 // @yuchen
+
 app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
-	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With,x-auth-token');
+	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS')
 	next();
-  });
+	});
+	
+
 app.use(express.json({ extended: false }))
 
 // app.get('/', (req,res) =>
@@ -20,9 +23,11 @@ app.use(express.json({ extended: false }))
 // );
 
 // Define Routes
-app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/basicuser', require('./routes/basicUser'));
-// app.use('/api/adminuser', require('./routes/adminUser'));
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/basicuser', require('./routes/basicUser'))
+app.use('/api/amuser', require('./routes/amUser'))
+app.use('/api/adminuser', require('./routes/adminUser'))
+app.use('/yuchen/api', require('./routes/yuchen'))
 
 const PORT = process.env.PORT || 5000;
 
@@ -54,26 +59,26 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 
 // Admin register @yuchen
-const bcrypt = require('bcryptjs');
-const User = require('./models/AdminUser');
+// const bcrypt = require('bcryptjs');
+// const User = require('./models/AdminUser');
 
-const adminRegister = async() => {
-  const password = 'abc12345678';
+// const adminRegister = async() => {
+//   const password = 'abc12345678';
 
-  const user = new User({
-    email: 'j0909089342@gmail.com',
-    password,
-    status: true
-  });
+//   const user = new User({
+//     email: 'j0909089342@gmail.com',
+//     password,
+//     status: true
+//   });
 
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(password, salt);
+//   const salt = await bcrypt.genSalt(10);
+//   user.password = await bcrypt.hash(password, salt);
 
-  await user.save();
+//   await user.save();
 
-  console.log('********************************************************');
-}
-adminRegister();
+//   console.log('********************************************************');
+// }
+// adminRegister();
 
 
 
@@ -88,14 +93,14 @@ adminRegister();
 //   const collegeDisplay = college.name;
 //   const password = 'test123123';
 
-//   const user = new User({
-//     email: 'mmk.ee.911@gmail.com',
-//     password,
-//     college: '5f2f7a09a5dc8a9d6f158996',
-//     collegeDisplay,
-//     area: 'Western',
-//     status: true
-//   });
+  // const user = new User({
+  //   email: 'mmk.ee.911@gmail.com',
+  //   password,
+  //   college: '5f2f7a09a5dc8a9d6f158996',
+  //   collegeDisplay,
+  //   area: 'Western',
+  //   status: true
+  // });
 //   const salt = await bcrypt.genSalt(10);
 //   user.password = await bcrypt.hash(password, salt);
 
