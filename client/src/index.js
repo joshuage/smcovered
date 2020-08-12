@@ -10,9 +10,17 @@ import App from './components/App'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)))
 
+// redux
+import { Provider } from 'react-redux'
+import store from './store'
+
+
 ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
-	document.getElementById('root')
-)
+  <React.StrictMode>
+		<Provider store={store}>
+    	<App />
+		</Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+

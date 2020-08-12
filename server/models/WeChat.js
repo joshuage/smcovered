@@ -29,11 +29,27 @@ const WechatSchema = new Schema({
     defaule: Date.now
   },
   groupName: {
-
+    type: String
   },
   college: {
     type: Schema.Types.ObjectId,
     ref: 'College'
+  },
+  collegeDisplay: {
+    type: String,
+    required: true
+  },
+  basicUser: {
+    type: Schema.Types.ObjectId,
+    ref: 'basicUser'
+  },
+  amUser: {
+    type: Schema.Types.ObjectId,
+    ref: 'amUser'
+  },
+  initalData: {
+    type: Boolean,
+    default: false
   }
 })
 
