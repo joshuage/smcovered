@@ -13,7 +13,7 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
-  title: null
+	title: null
 }
 
 export default function(state = initialState, action) {
@@ -27,7 +27,7 @@ export default function(state = initialState, action) {
       ...state,
       isAuthenticated: true,
       loading: false,
-      user: payload.token,                 // @yuchen 你这语句 user是token，那token是啥？
+      user: payload.token,                 // @yuchen 你这语句 user改成@mail
       title: payload.title
       }
     case REGISTER_SUCCESS:                 // @yuchen 你loading是干嘛的, 我没改

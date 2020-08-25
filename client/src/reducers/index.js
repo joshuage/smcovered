@@ -5,6 +5,8 @@ import { catchUserStatus } from './catchUserStatus'
 import { amUser } from './amUser'
 import { adminUser } from './adminUser'
 import { basicUser } from './basicUser'
+import { _auth } from './_auth'
+import { handleSelection, handlePop, data } from './handleSelection'
 
 export default combineReducers({
 	alert,
@@ -13,5 +15,9 @@ export default combineReducers({
 	amUser,
 	adminUser,
 	basicUser,
+	_auth,
+	handleSelection,
+	pop: handlePop,
+	data,
 });
 

@@ -18,13 +18,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
+
 
 //import { login } from '../../actions/auth'       // @yuchen 需要的做redirect
+import { handleAuth } from '../../actions/yuchen_actions'
 import { register } from '../../actions/auth'
-
 // @yuchen apis
-import { createAdminToken } from '../../apis/yuchenAPIs'
+import { createAdminToken, postToken, handleToken } from '../../apis/yuchenAPIs'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,11 +49,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const CreateAmbass = ({ register, isAuthenticated, title }) => {
+const CreateAmbass = ({ register, isAuthenticated, title, handleAuth }) => {
 
 	useEffect (() =>{
-		createAdminToken('yuchenge@asu.com', '666', localStorage.token)    // @yuchen我先不注册
-	}, [])
+		handleToken()
+		console.log(localStorage.token)
+		createAdminToken('11@1.com', '666')    // @yuchen我先不注册
+		
+		
+		
+		handleAuth(localStorage.token)
+
+		// postToken(localStorage.token)
+		// 	.then(e => {
+		// 		e === 'authenticated' ?
+		// 		console.log('from apis') : console.log('nnsd')
+		// 		// 	handleUnauth()
+		// 	})
+		// 	.catch(err => console.log(err+' from yuchenAPIs'))
+
+	}, [])   // dependency可以加一个要不然返回token不知道
 	
 	// @yuchen 先判断 admin 的 token；1 则update data，2 则redirect到登陆
 	// console.log(isAuthenticated)
@@ -168,4 +184,4 @@ const mapStateToProps = state => ({
 	title: state.auth.title
 });
 
-export default connect(mapStateToProps, { register })(CreateAmbass);
+export default connect(mapStateToProps, { handleAuth, register })(CreateAmbass);
