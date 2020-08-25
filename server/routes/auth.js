@@ -1,22 +1,26 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 const config = require('config')
-const auth = require('../middleware/auth');
-const { check, validationResult } = require('express-validator');
+const auth = require('../middleware/auth')
+const { check, validationResult } = require('express-validator')
 
-const AdminUser = require('../models/AdminUser');
-const AmUser = require('../models/AmUser');
-const BasicUser = require('../models/BasicUser');
+const AdminUser = require('../models/AdminUser')
+const AmUser = require('../models/AmUser')
+const BasicUser = require('../models/BasicUser')
 
 // @route     Get api/auth
 // @desc      Get logged in user
 // @access    Private
 router.get('/',auth, async (req, res) => {                 // @yuchen这块得改，不能作为谁都能用得方法? 这个方法有啥用，也没对比pwd
   try {
-		console.log(req)
-    const title = req.title;
+		// console.log(req)
+		const title = req.title
+		
+		console.log(req.title)
+
+
     let user;
     if (title == 'basic') {
       user = await BasicUser.findById(req.user).select('-password');
@@ -30,7 +34,7 @@ router.get('/',auth, async (req, res) => {                 // @yuchen这块得�
     console.log(error);
     res.status(500).send('Server Error');
   }
-});
+})
 
 // @route     Post api/auth/login
 // @desc      Auth user & get token
@@ -42,6 +46,7 @@ router.post(
     check('password', '请输入密码！').exists()
   ],
   async (req, res) => {
+		console.log(req.body)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
@@ -93,6 +98,6 @@ router.post(
       console.log(error.message);
       res.status(500).send('Server Error')
     }
-});
+})
 
-module.exports = router;
+module.exports = router

@@ -29,4 +29,4 @@ const amUserSchema = mongoose.Schema({
   }
 })
 
-module.exports = basicUser = mongoose.model('amUser', amUserSchema)
+module.exports = amUser = mongoose.model('amUser', amUserSchema)

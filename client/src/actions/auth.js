@@ -1,4 +1,4 @@
-import axios from '../apis/smCovered';
+import axios from '../apis/yuchenAxios';
 import { setAlert } from './alert'
 import {
   REGISTER_SUCCESS,
@@ -13,9 +13,10 @@ import {
 
 // Load User
 export const loadUser = () => async dispatch => {
+	// @yuchen 这段代码应该永远不用调用
   if (!localStorage.token) {
 		localStorage.setItem('token', '')
-    // setAuthToken(localStorage.token)          // @yuchen 
+		console.log('逻辑错误, 请排查, call handleToken first')
   }
 
   try {
@@ -83,7 +84,7 @@ export const login = ( email, password ) => async dispatch => {
   try {
     const res = await axios.post('/api/auth/login', body, config);
 
-    // console.log(res)
+  	console.log(res)
 
     dispatch({
       type: LOGIN_SUCCESS,
