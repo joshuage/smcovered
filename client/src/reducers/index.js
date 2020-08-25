@@ -20,3 +20,4 @@ export default combineReducers({
 	pop: handlePop,
 	data,
 });
+
